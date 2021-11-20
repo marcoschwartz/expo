@@ -9,6 +9,7 @@
 ### 🎉 New features
 
 - Add `ios.swiftModuleName` to module config. ([#16260](https://github.com/expo/expo/pull/16260) by [@esamelson](https://github.com/esamelson))
+- Support multiple iOS podspecs in one package. ([#15259](https://github.com/expo/expo/pull/15259) by [@kudo](https://github.com/kudo))
 
 ### 🐛 Bug fixes
 
