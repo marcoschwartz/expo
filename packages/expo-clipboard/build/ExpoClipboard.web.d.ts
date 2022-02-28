@@ -4,7 +4,7 @@ declare const _default: {
     getStringAsync(): Promise<string>;
     setString(text: string): boolean;
     setStringAsync(text: string): Promise<boolean>;
-    getImageAsync(options: GetImageOptions): Promise<ClipboardImage | null>;
+    getImageAsync(_options: GetImageOptions): Promise<ClipboardImage | null>;
     setImageAsync(base64image: string): Promise<void>;
     hasImageAsync(): Promise<boolean>;
     addClipboardListener(): void;
