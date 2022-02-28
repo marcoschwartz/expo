@@ -18,8 +18,12 @@ import java.lang.reflect.Method
 
 class ReactActivityDelegateWrapper(
   private val activity: ReactActivity,
+  private val isNewArchitectureEnabled: Boolean,
   private val delegate: ReactActivityDelegate
 ) : ReactActivityDelegate(activity, null) {
+  constructor(activity: ReactActivity, delegate: ReactActivityDelegate) :
+    this(activity, false, delegate)
+
   private val reactActivityLifecycleListeners = ExpoModulesPackage.packageList
     .flatMap { it.createReactActivityLifecycleListeners(activity) }
   private val reactActivityHandlers = ExpoModulesPackage.packageList
@@ -33,9 +37,11 @@ class ReactActivityDelegateWrapper(
   }
 
   override fun createRootView(): ReactRootView {
-    return reactActivityHandlers.asSequence()
+    val rootView = reactActivityHandlers.asSequence()
       .mapNotNull { it.createReactRootView(activity) }
       .firstOrNull() ?: invokeDelegateMethod("createRootView")
+    rootView.setIsFabric(isNewArchitectureEnabled)
+    return rootView
   }
 
   override fun getReactNativeHost(): ReactNativeHost {
